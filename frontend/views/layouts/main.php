@@ -37,11 +37,8 @@ AppAsset::register($this);
 
 
     echo "
-<div class='navbar-nav navbar-right'>
-    <br><a class=\"btn btn-lg btn-action\" href=\"http://www.yiiframework.com\">Подать объявление</a>
-</div>
+
 <div class='row'>
-PSKOVADS.RU
    <div class='input-group search'>
         <input type='text' class='form-control' name='q' placeholder='Название товара или услуги'>
         <span class='input-group-btn''>

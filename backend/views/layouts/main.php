@@ -28,7 +28,7 @@ $this->title = $this->title." | Панель Управления";
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body class="hold-transition skin-blue-light sidebar-mini sidebar-collapse">
 <?php $this->beginBody(); ?>
 <div class="wrapper">
   <header class="main-header">
@@ -40,10 +40,11 @@ $this->title = $this->title." | Панель Управления";
       <span class="logo-lg hide-xs">Панель Управления</span>
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
-        <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-        </a>
+        <div class="navbar-empty">
+            <ul class="nav navbar-nav">
+                <li class="user user-menu"><a class="dropdown-toggle"><?= !empty($this->params['header']) ? $this->params['header'] : '';  ?></a></li>
+            </ul>
+        </div>
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
