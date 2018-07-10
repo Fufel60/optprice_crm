@@ -68,12 +68,16 @@ $this->title = $this->title." | Панель Управления";
             'activateParents' => true,
             'items' => [
                 [
-                    'label' => '<i class="fa fa-list"></i> <span>Категории</span>',
-                    'url' => ['/organization-category/index'],
+                    'label' => '<i class="fa fa-list-alt"></i> <span>Офферы</span>',
+                    'url' => ['offer/index'],
                 ],
                 [
-                    'label' => '<i class="fa fa-list"></i> <span>Адреса</span>',
-                    'url' => ['/address/index'],
+                    'label' => '<i class="fa fa-hourglass-end"></i> <span>Статусы</span>',
+                    'url' => ['status/index'],
+                ],
+                [
+                    'label' => '<i class="fa fa-user"></i> <span>Пользователи</span>',
+                    'url' => ['user/index'],
                 ],
             ],
         ])?>
@@ -84,7 +88,6 @@ $this->title = $this->title." | Панель Управления";
  <!-- Content Header (Page header) -->
     <section class="content-header">
         <?php if (isset($this->params['header'])) : ?>
-            <h1><?=$this->params['header']?></h1>
         <?php endif; ?>
         <?php if(isset($this->params['breadcrumbs'])) : ?>
         <?=Breadcrumbs::widget([
