@@ -22,4 +22,32 @@ class UserController extends Controller
             'dp' => $dataProvider,
         ]);
     }
+
+    public function actionUpdate($id)
+    {
+        if ($id) {
+            $user = User::findOne($id);
+        }
+        else {
+            $user = new User();
+        }
+
+        if ($user->load(Yii::$app->request->post()) && $user->validate()) {
+            if ($user->save()) {
+                return $this->redirect(['/user/index']);
+            }
+        }
+
+        return $this->render('update', [
+            'user' => $user,
+        ]);
+    }
+
+    public function actionDelete($id)
+    {
+        $user = User::findOne($id);
+        if ($user->delete()) {
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+    }
 }

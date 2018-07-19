@@ -22,4 +22,32 @@ class StatusController extends Controller
             'dp' => $dataProvider,
         ]);
     }
+
+    public function actionUpdate($id)
+    {
+        if ($id) {
+            $status = Status::findOne($id);
+        }
+        else {
+            $status = new Status();
+        }
+
+        if ($status->load(Yii::$app->request->post()) && $status->validate()) {
+            if ($status->save()) {
+                return $this->redirect(['/status/index']);
+            }
+        }
+
+        return $this->render('update', [
+           'status' => $status,
+        ]);
+    }
+
+    public function actionDelete($id)
+    {
+        $status = Status::findOne($id);
+        if ($status->delete()) {
+            return $this->redirect(['/status/index']);
+        }
+    }
 }

@@ -3,6 +3,12 @@ namespace common\models;
 
 use yii\db\ActiveRecord;
 
+/**
+ * Class Status
+ * @package common\models
+ *
+ * @property string name
+ */
 class Status extends ActiveRecord
 {
     public static function tableName()
@@ -13,7 +19,14 @@ class Status extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name' => 'Статус заказа',
+            'name' => 'Статус оффера',
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            ['name', 'string', 'max' => 255]
         ];
     }
 }

@@ -1,13 +1,4 @@
 RewriteEngine on
-
-# rewrite for the frontend  - основной редирект в frontend/web
-RewriteCond %{REQUEST_URI} !^/(backend/web|admin)
-RewriteRule !^frontend/web /frontend/web%{REQUEST_URI} [L]
-
-# rewrite for the backend - все что начинается с /admin редиректится в /backend/web
-RewriteCond %{REQUEST_URI} ^/admin
-RewriteRule ^admin(.*) /backend/web/$1 [L]
-
-#RewriteRule ^admin$ admin/
-#RewriteRule ^admin/(.*)$ backend/web/$1 [L]
-#RewriteRule ^(.*)$ /admin/user/$1 [L]
+RewriteRule ^admin$ admin/
+RewriteRule ^admin/(.*)$ backend/web/$1 [L]
+RewriteRule ^(.*)$ /admin/user/$1 [L]

@@ -3,6 +3,43 @@ namespace common\models;
 
 use yii\db\ActiveRecord;
 
+/**
+ * Class Offer
+ * @package common\models
+ *
+ * @property integer $user_id
+ * @property integer $status_id
+ * @property integer $product_id
+ * @property integer $search_adv
+ * @property integer $search_marketplace
+ * @property integer $search_china
+ * @property integer $search_youtube
+ * @property integer $search_tv
+ * @property string $search_coupon
+ * @property integer $search_cra
+ * @property integer $search_wholesale
+ * @property integer $search_store
+ * @property integer $search_rsja
+ * @property integer $search_publer
+ * @property integer $search_seo
+ * @property integer $analytics_google_trends
+ * @property integer $analytics_wordstat
+ * @property integer $analytics_cpa
+ * @property integer $analytics_store
+ * @property integer $analytics_wow
+ * @property integer $analytics_season
+ * @property integer $analytics_offline
+ * @property integer $analytics_potential
+ * @property string $search_priority
+ * @property string $start_search_msk
+ * @property string $start_search_online
+ * @property string $start_search_china
+ * @property string $start_comment
+ * @property string $start_result
+ * @property string $info
+ * @property string $created_at
+ * @property string $updated_at
+ */
 class Offer extends ActiveRecord
 {
     const STATUS_YES = 1;
@@ -118,5 +155,10 @@ class Offer extends ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getProduct()
+    {
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 }

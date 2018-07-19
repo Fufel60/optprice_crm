@@ -23,7 +23,24 @@ $form = ActiveForm::begin([
     <div class="box-body">
         <div class="row">
             <div class="col-md-6">
-                Товары
+                <h3>Товары</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <?php
+                if ($offer->product) {
+                    if (!empty($offer->product->product_url)) {
+                        echo Html::a($offer->product->product_name, $offer->product->product_url, ['target' => '_blank']);
+                    }
+                    else {
+                        echo $offer->product->product_name;
+                    }
+                }
+                else {
+                    echo Html::a(" <i class='glyphicon glyphicon-plus'></i> Добавить товар", ['/product/update?id=0&offerid=' . $offer->id], ['title' => 'Добавить']);
+                }
+                ?>
             </div>
         </div>
         <div class="row">

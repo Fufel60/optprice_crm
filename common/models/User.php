@@ -5,21 +5,22 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\web\IdentityInterface;
 
 /**
  * User model
  *
  * @property integer $id
- * @property string $username
+ * @property integer $dept_id
+ * @property string $auth_key
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
- * @property string $auth_key
- * @property integer $status
+ * @property string $role
+ * @property string $name
  * @property integer $created_at
  * @property integer $updated_at
- * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -40,7 +41,20 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'createdAtAttribute' => 'created_at',
+                'createdAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Имя сотрудника',
+            'dept_id' => 'Отдел',
         ];
     }
 
@@ -52,12 +66,14 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['email'], 'trim'],
             ['email', 'unique'],
+            ['dept_id', 'integer'],
             ['role', 'default', 'value' => 'user'],
             ['role', 'in', 'range' => ['user', 'admin']],
             [['email','role'], 'required'],
             ['auth_key','default', 'value' => Yii::$app->security->generateRandomString(32)],
             ['password', 'safe'],
             ['password_confirmation', 'compare', 'compareAttribute' => 'password'],
+            ['name', 'string', 'max' => 255],
         ];
     }
 

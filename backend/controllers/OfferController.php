@@ -42,4 +42,12 @@ class OfferController extends Controller
             'offer' => $offer,
         ]);
     }
+
+    public function actionDelete($id)
+    {
+        $offer = Offer::findOne($id);
+        if ($offer->delete()) {
+            return $this->redirect(['/offer/index']);
+        }
+    }
 }
