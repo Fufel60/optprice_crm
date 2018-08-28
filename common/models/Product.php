@@ -30,7 +30,10 @@ class Product extends ActiveRecord
     {
         return [
             [
-                ['product_name', 'product_url'], 'string', 'max' => 255
+                'product_name', 'required'
+            ],
+            [
+                ['product_name', 'product_url'], 'string',
             ]
         ];
     }

@@ -197,6 +197,11 @@ class User extends ActiveRecord implements IdentityInterface
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
+    public function generatePassword()
+    {
+        return Yii::$app->security->generateRandomString(7);
+    }
+
     /**
      * Generates new password reset token
      */

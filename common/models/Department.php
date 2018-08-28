@@ -11,6 +11,12 @@ use yii\db\ActiveRecord;
  */
 class Department extends ActiveRecord
 {
+    // Отдел арбитража
+    const DEPARTMENT_ARBITR = 2;
+
+    // Товарный отдел
+    const DEPARTMENT_PRODUCT = 4;
+
     public static function tableName()
     {
         return '{{dept}}';

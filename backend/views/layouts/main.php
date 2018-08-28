@@ -72,6 +72,14 @@ $this->title = $this->title." | Панель Управления";
                     'url' => ['offer/index'],
                 ],
                 [
+                    'label' => '<i class="fa fa-check-square-o"></i> <span>Тестинг</span>',
+                    'url' => ['testing/index'],
+                ],
+                [
+                    'label' => '<i class="fa fa-line-chart"></i> <span>Статистика</span>',
+                    'url' => ['report/index'],
+                ],
+                [
                     'label' => '<i class="fa fa-hourglass-end"></i> <span>Статусы</span>',
                     'url' => ['status/index'],
                 ],

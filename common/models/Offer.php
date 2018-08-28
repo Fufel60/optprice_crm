@@ -1,7 +1,9 @@
 <?php
 namespace common\models;
 
+use Yii;
 use yii\db\ActiveRecord;
+use yii\data\ActiveDataProvider;
 
 /**
  * Class Offer
@@ -47,6 +49,7 @@ class Offer extends ActiveRecord
     const START_RESULT_YES  = 'Зашел';
     const START_RESULT_NO = 'Не зашел';
     const START_RESULT_CHANGE = 'Передумал';
+    public $statusChanged;
 
     public static function tableName()
     {
@@ -57,9 +60,11 @@ class Offer extends ActiveRecord
     {
         return [
             'user_id' => 'Сотрудник',
-            'status_id' => 'Cтатус',
+            'status_id' => 'Название статуса',
+            'product_name' => 'Название',
+            'product_price' => 'Стоимость найденного товара',
             'search_adv' => 'Реклама',
-            'search_marketplace' => 'Eвропейские и американские площадки',
+            'search_marketplace' => 'Площадки Европа/Америка',
             'search_china' => 'Китайские сайты',
             'search_youtube' => 'Ютуб обзоры',
             'search_tv' => 'Тв шоп',
@@ -69,7 +74,7 @@ class Offer extends ActiveRecord
             'search_store' => 'Интернет магазины',
             'search_rsja' => 'РСЯ',
             'search_publer' => 'Publer',
-            'search_seo' => 'Поиск в Яндексе/гугле по ключевому запросу',
+            'search_seo' => 'Поиск в Yandex/Google',
             'analytics_google_trends' => 'Google Тренды - популярность по 100 бальной шкале',
             'analytics_wordstat' => 'Вордстат - Динамика и спрос по шкале от 1 до 10',
             'analytics_cpa' => 'Есть ли в цпа-сетях?',
@@ -83,8 +88,9 @@ class Offer extends ActiveRecord
             'start_search_online' => 'Результат поиска онлайн',
             'start_search_china' => 'Результат поиска Китай',
             'start_comment' => 'Комментарий запуска',
-            'start_result' => 'Результат запуска (Наш арбитраж)',
+            'start_result' => 'Результат теста',
             'info' => 'Доп. информация',
+            'created_at' => 'Дата',
         ];
     }
 
@@ -93,16 +99,8 @@ class Offer extends ActiveRecord
         return [
             [
                [
-                   'search_coupon',
-                   'analytics_google_trends',
-                   'analytics_wordstat',
-                   'analytics_store',
-                   'start_search_online',
-                   'analytics_wow',
-                   'analytics_potential',
-                   'search_priority',
-                   'start_search_msk',
-                   'start_search_china',
+                   'user_id',
+                   'product_name',
                ],
                 'required'
             ],
@@ -149,6 +147,9 @@ class Offer extends ActiveRecord
             [
                 ['analytics_wordstat', 'analytics_store', 'analytics_wow', 'analytics_potential'], 'integer', 'max' => 10,
             ],
+            [
+                'product_price', 'number',
+            ]
         ];
     }
 
@@ -160,5 +161,30 @@ class Offer extends ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+
+    public function getStatus()
+    {
+        return $this->hasOne(Status::className(), ['id' => 'status_id']);
+    }
+
+    public function getTestingStatus()
+    {
+        return $this->hasOne(Testing::className(), ['product_id' => 'id']);
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if (isset($this->oldAttributes['status_id']) && $this->status_id != $this->oldAttributes['status_id']) {
+                $this->statusChanged = true;
+                return true;
+            }
+            else {
+                $this->statusChanged = false;
+                return true;
+            }
+        }
+        else return false;
     }
 }

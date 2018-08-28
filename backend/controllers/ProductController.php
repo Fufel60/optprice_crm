@@ -9,7 +9,7 @@ use yii\web\Controller;
 
 class ProductController extends Controller
 {
-    public function actionUpdate($id, $offerid)
+    public function actionUpdate($id, $offerId)
     {
         if ($id) {
             $product = Product::findOne($id);
@@ -19,12 +19,13 @@ class ProductController extends Controller
         }
 
         if ($product->load(Yii::$app->request->post()) && $product->validate()) {
-            $product->offer_id = $offerid;
+            $product->offer_id = $offerId;
             if ($product->save()) {
-                $offer = Offer::findOne($offerid);
+                $offer = Offer::findOne($offerId);
                 $offer->product_id = $product->id;
-                $offer->save();
-                return $this->redirect(['/offer/update?id=' . $offerid]);
+                if ($offer->save()) {
+                    return $this->redirect(['/offer/update?id=' . $offerId]);
+                }
             }
         }
 

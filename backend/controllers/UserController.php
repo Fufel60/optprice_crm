@@ -31,10 +31,19 @@ class UserController extends Controller
         else {
             $user = new User();
         }
-
+        $password = $user->generatePassword();
+        $user->setPassword($password);
         if ($user->load(Yii::$app->request->post()) && $user->validate()) {
             if ($user->save()) {
-                return $this->redirect(['/user/index']);
+                Yii::$app->mailer->compose(
+                    'views/register/index',
+                    ['password' => $password, 'login' => $user->email]
+                )
+                    ->setFrom('zakaz@optprice24.ru')
+                    ->setTo($user->email)
+                    ->setSubject('Регистрация в системе генерации офферов')
+                    ->send();
+                $this->redirect(['/user/index']);
             }
         }
 
