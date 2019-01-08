@@ -50,4 +50,11 @@ class TestingController extends Controller
             return $this->redirect(['testing/index']);
         }
     }
+
+    public function actionToggle($id)
+    {
+        $product = Testing::findOne($id);
+        $product->cpa = !$product->cpa;
+        $product->save();
+    }
 }

@@ -42,7 +42,7 @@ class Testing extends ActiveRecord
                 ['user_id', 'status_id', 'price'], 'integer'
             ],
             [
-                'product_id', 'required'
+                ['product_id', 'cpa'], 'required'
             ]
         ];
     }

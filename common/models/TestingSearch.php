@@ -9,7 +9,7 @@ use yii\data\ActiveDataProvider;
  * Class AreaSearch
  * @package common\models
  */
-class TestingSearch extends Offer
+class TestingSearch extends Testing
 {
 
     /**
@@ -31,7 +31,7 @@ class TestingSearch extends Offer
     {
         return [
             [
-                ['status_id'], 'integer'
+                ['status_id', 'cpa'], 'integer'
             ],
             [
                 [
@@ -67,6 +67,7 @@ class TestingSearch extends Offer
             }
             $query->andFilterWhere(['between', 'created_at', $this->created_at_start, $this->created_at_end]);
             $query->andFilterWhere(['like', 'status_id', $this->status_id]);
+            $query->andFilterWhere(['like', 'cpa', $this->cpa]);
         }
 
         return $dataProvider;

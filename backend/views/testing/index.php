@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use backend\widgets\GridViewToggleColumn;
 use common\models\Offer;
 
 /**
@@ -63,6 +64,10 @@ $this->params['toolbar'] = [
                         ],
                         [
                             'attribute' => 'vk',
+                        ],
+                        [
+                            'attribute' => 'cpa',
+                            'class' => GridViewToggleColumn::class,
                         ],
                         [
                             'attribute' => 'price',

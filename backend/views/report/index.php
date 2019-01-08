@@ -5,7 +5,7 @@ use yii\helpers\ArrayHelper;
 use kartik\daterange\DateRangePicker;
 use common\models\StatusTesting;
 use yii\grid\GridView;
-use common\models\TotalColumn;
+use common\models\Offer;
 
 /**
  * @var \yii\data\ActiveDataProvider $dataProvider
@@ -63,6 +63,18 @@ $this->params['header'] = $this->title;
                         'value' => function ($offer) {
                             return $offer->product->product_name;
                         }
+                    ],
+                    [
+                        'attribute' => 'cpa',
+                        'value' => function ($offer) {
+                            return $offer->cpa == Offer::STATUS_YES ? 'Да' : 'Нет';
+                        },
+                        'filter' =>
+                            Html::activeDropDownList($searchModel, 'cpa', [
+                                Offer::STATUS_YES => 'Да',
+                                Offer::STATUS_NO => 'Нет',
+
+                            ], ['class'=>'form-control', 'prompt' => 'Все'])
                     ],
                 ],
             ]);

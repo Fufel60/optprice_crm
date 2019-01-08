@@ -57,6 +57,12 @@ $form = ActiveForm::begin([
                 <?= $form->field($test, 'mt'); ?>
                 <?= $form->field($test, 'rsja'); ?>
                 <?= $form->field($test, 'vk'); ?>
+                <?= $form->field($test, 'cpa')->dropDownList([
+                    Offer::STATUS_YES => 'Да',
+                    Offer::STATUS_NO => 'Нет',
+                ]
+                );
+                ?>
                 <?= $form->field($test, 'price'); ?>
                 <?= $form->field($test, 'search_result'); ?>
                 <?= $form->field($test, 'fail_comment'); ?>
