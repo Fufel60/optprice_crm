@@ -5,7 +5,7 @@ namespace backend\assets;
 class AdminLTEAsset extends \yii\web\AssetBundle
 {
 
-    public $sourcePath = "@bower/admin-lte";
+    public $sourcePath = "@vendor/almasaeed2010/adminlte";
 
     public $js = [
         'dist/js/app.min.js',

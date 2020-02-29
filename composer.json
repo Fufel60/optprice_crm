@@ -14,14 +14,14 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=7.0",
         "yiisoft/yii2": "~2.0.6",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "dmstr/yii2-db": "^0.7.8",
         "sunra/php-simple-html-dom-parser": "1.5.2",
         "creocoder/yii2-nested-sets": "^0.9.0",
-        "bower-asset/admin-lte": "*",
+        "dmstr/yii2-adminlte-asset": "^2.1",
         "kartik-v/yii2-date-range": "dev-master",
         "kartik-v/yii2-grid": "@dev"
     },
